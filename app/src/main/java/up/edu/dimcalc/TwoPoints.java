@@ -43,7 +43,8 @@ public class TwoPoints {
 
     /** copy the values in one points to the other */
     public void copy(int srcIndex, int destIndex) {
-        points[destIndex] = points[srcIndex];
+        points[destIndex].x = points[srcIndex].x;
+        points[destIndex].y = points[srcIndex].y;
     }
 
     /** calculates the distance between the two points rounded to the nearest integer */
@@ -60,14 +61,18 @@ public class TwoPoints {
      * @return the slope or 0 if the points are equal */
     public double slope() {
         double result = 0.0;
-        if (points[0] == points[1]) {
+        if (points[0].x == points[1].x && points[0].y == points[1].y) {
             return result;
         }
 
-        int xDiff = points[0].x - points[1].x;
-        int yDiff = points[0].y - points[1].y;
-
-        result = xDiff / yDiff;
+        double xDiff = points[0].x - points[1].x;
+        double yDiff = points[0].y - points[1].y;
+        if(xDiff == 0.0){
+            result = Double.MAX_VALUE;
+        }
+        else {
+            result = yDiff / xDiff;
+        }
         return result;
     }
 
